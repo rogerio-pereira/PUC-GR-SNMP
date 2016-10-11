@@ -86,7 +86,7 @@ public class SNMP_Model {
         this.community = community;
     }
     
-    public String teste() throws IOException 
+    public String consulta() throws IOException 
     {
         // TODO code application logic here
         TransportMapping transport = new DefaultUdpTransportMapping();
