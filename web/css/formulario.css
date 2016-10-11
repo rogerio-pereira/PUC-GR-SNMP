@@ -1,0 +1,81 @@
+::-webkit-input-placeholder 
+{
+   color: #777777;
+}
+:-moz-placeholder 
+{
+   color: #777777;  
+}
+::-moz-placeholder
+{
+   color: #777777;  
+}
+:-ms-input-placeholder 
+{
+   color: #777777;
+}
+
+input, select, textarea
+{
+    position: relative;
+    width: 100%;
+    -webkit-border-radius:  8px;
+    -moz-border-radius:     8px;
+    border-radius:          8px;
+
+    padding:                3px;
+    padding-left:           8px;
+    padding-right:          8px;
+
+    margin-top:             4px;
+    margin-bottom:          10px;
+
+    outline:                none;
+
+    font-family:            'Open Sans Condensed', sans-serif;
+    font-size:              1em;
+    border:                 solid 1px #cbcbcb;
+
+    background-color:       #ffffff;
+    color:                  black;
+    font-weight:            normal;
+}
+
+input:hover, select:hover, textarea:hover
+{
+    border: solid 1px #999999;
+}
+
+input[type="radio"], input[type="checkbox"]
+{
+    display: inline !important;
+}
+
+input[type="submit"], input[type="button"]
+{
+    width:  80px;
+    color:  black;
+    cursor: pointer;
+}
+
+input[type="submit"]
+{
+    background-color:   #4EC95C;
+    border-color:       black;
+}
+
+#tinymce
+{
+    position: relative;
+
+    font-size:              1em;
+
+    background-color:       #ffffff;
+    color:                  black;
+    font-weight:            normal;
+}
+
+div#imagemUploader img
+{
+    width: 100%;
+}

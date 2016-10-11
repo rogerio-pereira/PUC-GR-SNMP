@@ -1,16 +1,91 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
+    <head>                    
+        <!--CSS-->
+        <!--Fontes-->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+        <!--Icones-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+        <!--CSS-->
+        <link rel="stylesheet" href="css/style.min.css">
+        <link rel="stylesheet" href="css/formulario.min.css">
+
+        <!--META-->
+        <meta charset='UTF-8' />
+        <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+        
+        <!--JS-->
+        <!--JQuery-->
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+
+        <!--SKEL-->
+        <script type="text/javascript" src="js/skel.min.js"></script>
+        <script type="text/javascript" src="js/skel-layout.min.js"></script>
+
+        <!--MASKED INPUT-->
+        <script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <header>
+            <h1>SNMP</h1>
+        </header>
+
+        <div class='container'>
+            <section>
+                <form id='snmp' name='snmtp' action='' method="post">
+                    <div class='row center'>
+                        <div class='3u'>
+                            <input type='text' name='ip' id='ip' class='ip' placeholder='IP' required>
+                        </div>
+                        <div class='3u'>
+                            <input type='number' min='1' name='porta' id='porta' placeholder='Porta' required>
+                        </div>
+                        <div class='3u'>
+                            <input type='text' name='comunidade' id='comunidade' placeholder='Comunidade' required>
+                        </div>
+                        <div class='3u'>
+                            <select name='operacao' id='operacao' required>
+                                <option value='' selected disabled>Operação</option>
+                                <option value='Consulta Simples'>Consulta Simples</option>
+                                <option value='Monitoramento'>Monitoramento</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class='row center'>
+                        <div class='4u -4u'>
+                            <input 
+                                type='button' 
+                                id='adicionaOID' 
+                                class='adicionaOID center' 
+                                onclick='addOID()'
+                                value='OID'
+                            >
+                            <input type='hidden' name='numeroCamposOID' id='numeroCamposOID' value='0'>
+                        </div>
+                    </div>
+
+                    <div class='row center' id='camposOID'>
+                    </div>
+
+                    <div class='row center'>
+                        <div class='4u -4u'>
+                            <input type='submit' class='center' value='Salvar'>
+                        </div>
+                    </div>
+                </form>                
+            </section>
+        </div>
+
+        <footer>
+            <strong>PUC Minas - Poços de Caldas - Gerencia de Redes</strong><br/>
+            Desenvolvido por: Rogério Eduardo Pereira<br/>
+            Grupo: Ênio, Rogério, Wesley
+        </footer>
     </body>
 </html>
+
+<script type="text/javascript" src="js/jsInit.min.js"></script>
+<script type="text/javascript" src="js/jsSNMP.min.js"></script>
