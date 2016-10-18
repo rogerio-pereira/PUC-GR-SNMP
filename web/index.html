@@ -26,6 +26,41 @@
 
         <!--MASKED INPUT-->
         <script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
+        
+        <script>
+            var httpObject;
+
+            function processaResposta(){
+                if(httpObject.readyState==4){
+                    document.getElementById("resposta").innerHTML=httpObject.responseText;
+                }
+            }
+
+            function requisicaoAjax(url){
+                if (window.XMLHttpRequest){
+                    httpObject=new XMLHttpRequest();
+                }else if (window.ActiveXObject){
+                    httpObject=new ActiveXObject("Microsoft.XMLHTTP");
+                }else{
+                    alert("Navegador não suporta Ajax");
+                }
+
+                httpObject.onreadystatechange=processaResposta;
+                httpObject.open("GET",url,true);
+                httpObject.send(null);
+            }
+
+            function consultaDadosSnmp(){
+                var ip          = document.getElementById("ip").value;
+                var oid         = document.getElementById("oid").value;
+                var comunidade  = document.getElementById("comunidade").value;
+                var operacao    = document.getElementById("operacao").value;
+
+                var url         = "Consulta.jsp?ip="+ip+"&oid="+oid+"&comunidade="+comunidade+"&operacao="+operacao;
+
+                requisicaoAjax(url);
+            }
+        </script>
     </head>
     <body>
         <header>
@@ -34,27 +69,27 @@
 
         <div class='container'>
             <section>
-                <form id='snmp' name='snmtp' action='' method="post">
+                <form id='snmp' name='snmtp'>
                     <div class='row center'>
                         <div class='3u'>
-                            <input type='text' name='ip' id='ip' class='ip' placeholder='IP' required>
+                            <input type='text' name='ip' id='ip' class='ip_' placeholder='IP' required>
                         </div>
                         <div class='3u'>
-                            <input type='number' min='1' name='porta' id='porta' placeholder='Porta' required>
+                            <input type='text' name='oid' id='oid' placeholder='OID' required>
                         </div>
                         <div class='3u'>
                             <input type='text' name='comunidade' id='comunidade' placeholder='Comunidade' required>
                         </div>
                         <div class='3u'>
-                            <select name='operacao' id='operacao' required>
+                            <select name='operacao' id='operacao'>
                                 <option value='' selected disabled>Operação</option>
-                                <option value='Consulta Simples'>Consulta Simples</option>
+                                <option value='Simples'>Consulta Simples</option>
                                 <option value='Monitoramento'>Monitoramento</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class='row center'>
+                    <!--<div class='row center'>
                         <div class='4u -4u'>
                             <input 
                                 type='button' 
@@ -68,12 +103,15 @@
                     </div>
 
                     <div class='row center' id='camposOID'>
-                    </div>
+                    </div>-->
 
                     <div class='row center'>
                         <div class='4u -4u'>
-                            <input type='submit' class='center' value='Salvar'>
+                            <input type='button' class='center' value='Salvar' onclick="consultaDadosSnmp();">
                         </div>
+                    </div>
+                    
+                    <div class='12u' id='resposta'>
                     </div>
                 </form>                
             </section>

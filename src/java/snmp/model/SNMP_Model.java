@@ -23,10 +23,10 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 
 /**
  *
- * @author Rogério Eduardo Pereira <rogerio@groupsofter.com.br>
+ * @author Rogério Eduardo Pereira <rogerio@colmeiatecnologia.com.br>
  * @version 1.0
  */
-public class SNMP_Model {
+public class SNMP_Model{
     OID     oid;
     Address ip;
     String  community;
@@ -114,10 +114,48 @@ public class SNMP_Model {
         target.setVersion(SnmpConstants.version1);
         ResponseEvent event = snmp.send(pdu, target, null);
         if(event != null) {
-             System.out.println("Resposta: " + event.getResponse().get(0).getVariable().toString());
+            System.out.println("Resposta: " + event.getResponse().get(0).getVariable().toString());
         }else{
             System.out.println("Erro!!!!");
+            return null;
         }
+        return event.getResponse().get(0).getVariable().toString();
+    }  
+    
+    public String consulta2(String x, String y, String z) throws IOException 
+    {
+        // TODO code application logic here
+        TransportMapping transport = new DefaultUdpTransportMapping();
+        Snmp snmp = new Snmp(transport);
+	
+        // Do not forget this line!
+        transport.listen(); //Muito importante ter esse listen, pq se nao nao atende a resposta
+        //OID oid = new OID(".1.3.6.1.2.1.2.2.1.2.1");
+        OID oid = new OID(x);
+                
+        PDU pdu = new PDU();
+        pdu.add(new VariableBinding(oid)); 	
+        //pdu.add(new VariableBinding(getOid())); 	
+        pdu.setType(PDU.GET);
+        
+        Address destino = GenericAddress.parse(y); //demo.snmplabs.com
+        
+        CommunityTarget target = new CommunityTarget();
+        target.setCommunity(new OctetString(z));
+        target.setAddress(destino);
+        //target.setCommunity(new OctetString(getCommunity()));
+        //target.setAddress(getIp());
+        target.setRetries(2);   //Numero de tentativas
+        target.setTimeout(1500);
+        target.setVersion(SnmpConstants.version1);
+        ResponseEvent event = snmp.send(pdu, target, null);
+        if(event != null) {
+            System.out.println("Resposta: " + event.getResponse().get(0).getVariable().toString());
+        }else{
+            System.out.println("Erro!!!!");
+            return null;
+        }
+        
         return event.getResponse().get(0).getVariable().toString();
     }  
 }
